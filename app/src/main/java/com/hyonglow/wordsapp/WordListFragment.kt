@@ -32,7 +32,6 @@ class WordListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         arguments?.let {
             letterId = it.getString(LETTER).toString()
         }

@@ -23,7 +23,7 @@ class WordAdapter(private val letterId: String, context: Context) :
         // Retrieve the list of words from res/values/arrays.xml
         val words = context.resources.getStringArray(R.array.words).toList()
         filteredWords =
-            words.filter { it.startsWith(letterId, ignoreCase = true) }.shuffled().take(5).sorted()
+            words.filter { it.startsWith(letterId, ignoreCase = true) }.shuffled().take(10).sorted()
     }
 
     class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
