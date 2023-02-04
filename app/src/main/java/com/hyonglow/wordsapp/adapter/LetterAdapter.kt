@@ -1,4 +1,4 @@
-package com.hyonglow.wordsapp
+package com.hyonglow.wordsapp.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+import com.hyonglow.wordsapp.R
+import com.hyonglow.wordsapp.WordListFragment
 
-class LetterAdapter(val context: Context) : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
+class LetterAdapter(val context: Context?) : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
 
     private val list = ('A').rangeTo('Z').toList()
 
@@ -37,9 +39,9 @@ class LetterAdapter(val context: Context) : RecyclerView.Adapter<LetterAdapter.L
             // Add the selected letter to the intent as extra data
             // The text of Buttons are [CharSequence], a list of characters,
             // so it must be explicitly converted into a [String].
-            intent.putExtra(DetailActivity.LETTER, holder.button.text.toString())
+            intent.putExtra(WordListFragment.LETTER, holder.button.text.toString())
             // Start an activity using the data and destination from the Intent.
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
     }
 

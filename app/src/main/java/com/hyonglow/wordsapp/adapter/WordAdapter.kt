@@ -1,4 +1,4 @@
-package com.hyonglow.wordsapp
+package com.hyonglow.wordsapp.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -11,29 +11,19 @@ import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.hyonglow.wordsapp.R
+import com.hyonglow.wordsapp.WordListFragment
 
 
 class WordAdapter(private val letterId: String, context: Context) :
     RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
-
     private val filteredWords: List<String>
-
     init {
         // Retrieve the list of words from res/values/arrays.xml
         val words = context.resources.getStringArray(R.array.words).toList()
-
-        filteredWords = words
-            // Returns items in a collection if the conditional clause is true,
-            // in this case if an item starts with the given letter,
-            // ignoring UPPERCASE or lowercase.
-            .filter { it.startsWith(letterId, ignoreCase = true) }
-            // Returns a collection that it has shuffled in place
-            .shuffled()
-            // Returns the first n items as a [List]
-            .take(5)
-            // Returns a sorted version of that [List]
-            .sorted()
+        filteredWords =
+            words.filter { it.startsWith(letterId, ignoreCase = true) }.shuffled().take(5).sorted()
     }
 
     class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -64,7 +54,7 @@ class WordAdapter(private val letterId: String, context: Context) :
 
         // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
         holder.button.setOnClickListener {
-            val queryUrl: Uri = Uri.parse("${DetailActivity.SEARCH_PREFIX}${item}")
+            val queryUrl: Uri = Uri.parse("${WordListFragment.SEARCH_PREFIX}${item}")
             val intent = Intent(Intent.ACTION_VIEW, queryUrl)
             context.startActivity(intent)
         }
